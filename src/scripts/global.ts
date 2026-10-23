@@ -1,26 +1,43 @@
 import { initNavDock } from './nav-dock';
 
+type Theme = 'light' | 'dark' | 'sepia';
 const THEME_KEY = 'cdu-ai-theme';
+const THEMES: readonly Theme[] = ['light', 'dark', 'sepia'] as const;
+const THEME_LABELS: Record<Theme, string> = {
+  light: '浅色',
+  dark: '深色',
+  sepia: '护眼',
+};
 const root = document.documentElement;
 
-function updateThemeControls(theme: string): void {
-  const toDark = theme !== 'dark';
+function isTheme(value: string | null): value is Theme {
+  return value === 'light' || value === 'dark' || value === 'sepia';
+}
+
+function nextTheme(current: string): Theme {
+  const idx = THEMES.indexOf(current as Theme);
+  return THEMES[(idx + 1) % THEMES.length];
+}
+
+function updateThemeControls(theme: Theme): void {
+  const next = nextTheme(theme);
   document.querySelectorAll<HTMLElement>('[data-theme-toggle]').forEach((button) => {
-    const label = toDark ? '切换到深色主题' : '切换到浅色主题';
+    const label = `当前：${THEME_LABELS[theme]} · 点击切换到${THEME_LABELS[next]}`;
     button.setAttribute('aria-label', label);
     button.setAttribute('title', label);
+    button.dataset.themeCurrent = theme;
   });
 }
 
-function applyTheme(theme: string): void {
+function applyTheme(theme: Theme): void {
   root.dataset.theme = theme;
   updateThemeControls(theme);
 }
 
-function savedTheme(): string | null {
+function savedTheme(): Theme | null {
   try {
     const value = localStorage.getItem(THEME_KEY);
-    return value === 'light' || value === 'dark' ? value : null;
+    return isTheme(value) ? value : null;
   } catch {
     return null;
   }
@@ -30,7 +47,7 @@ applyTheme(savedTheme() ?? (window.matchMedia('(prefers-color-scheme: dark)').ma
 
 document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((button) => {
   button.addEventListener('click', () => {
-    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    const next = nextTheme(root.dataset.theme ?? 'light');
     applyTheme(next);
     try {
       localStorage.setItem(THEME_KEY, next);

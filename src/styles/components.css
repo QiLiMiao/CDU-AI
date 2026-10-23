@@ -142,15 +142,27 @@
   place-items: center;
 }
 
-.theme-icon--sun {
+/* 默认 light：显 moon（暗示下一步 dark）；sun/sprout 隐藏 */
+.theme-icon--sun,
+.theme-icon--sprout {
   display: none;
 }
 
+/* dark：显 sprout（暗示下一步 sepia） */
 :root[data-theme='dark'] .theme-icon--moon {
   display: none;
 }
 
-:root[data-theme='dark'] .theme-icon--sun {
+:root[data-theme='dark'] .theme-icon--sprout {
+  display: grid;
+}
+
+/* sepia：显 sun（暗示下一步回到 light） */
+:root[data-theme='sepia'] .theme-icon--moon {
+  display: none;
+}
+
+:root[data-theme='sepia'] .theme-icon--sun {
   display: grid;
 }
 

@@ -162,3 +162,75 @@
   --shadow-card: 0 8px 30px -22px rgba(0, 0, 0, 0.8);
   --shadow-float: 0 18px 50px -24px rgba(0, 0, 0, 0.9);
 }
+
+/**
+ * 护眼主题（sepia）
+ * 暖米白底 + 深暖棕文字，保留品牌蓝交互色，代码块用暖深棕底护眼阅读。
+ * 变量名与 light/dark 一致，只改值；组件级 :root[data-theme='dark'] 覆盖不会套用本主题，
+ * 绝大多数样式靠这些变量驱动，可正常继承。
+ */
+:root[data-theme='sepia'] {
+  color-scheme: light;
+
+  /* surfaces */
+  --bg: #f7f1e1;
+  --bg-soft: #efe6cf;
+  --surface: #fbf5e4;
+  --surface-strong: #fbf5e4;
+  --surface-muted: #ece0c2;
+  --bg-inverse: #2b2316;
+  --ink-on-inverse: #faf5e6;
+
+  /* text */
+  --ink: #3a2d18;
+  --ink-soft: #5a4a2e;
+  --muted: #6e5d3c;
+  --faint: #8a7556;
+
+  /* lines */
+  --line: #ddcaa8;
+  --line-strong: #c9b288;
+
+  /* brand */
+  --brand: #2563eb;
+  --brand-strong: #1d4ed8;
+  --brand-soft: #eaf0fb;
+  --brand-tint: #f2f6fc;
+  --on-brand: #ffffff;
+
+  /* accents */
+  --accent: #2563eb;
+  --accent-vivid: #60a5fa;
+  --accent-soft: #eaf0fb;
+  --sky: #0e7490;
+  --sky-soft: #e6f7fb;
+  --sun: #a16207;
+  --sun-soft: #faf2d4;
+  --ok: #15803d;
+  --danger: #dc2626;
+
+  /* git 分支赛道色 */
+  --vibe: #7c3aed;
+  --vibe-soft: #f1ebff;
+
+  /* states */
+  --focus: #2563eb;
+  --backdrop: rgba(43, 35, 22, 0.48);
+  --header-bg: rgba(247, 241, 225, 0.86);
+
+  /* code */
+  --code-bg: #2b2316;
+  --code-fg: #f4e9d2;
+  --code-muted: #b8a888;
+
+  /* decorative */
+  --grid-dot: transparent;
+  --glow-a: transparent;
+  --glow-b: transparent;
+
+  /* shadows（暖黑调，比 light 略重，比 dark 轻） */
+  --shadow-xs: 0 1px 2px rgba(58, 45, 24, 0.06);
+  --shadow-sm: 0 1px 3px rgba(58, 45, 24, 0.08), 0 10px 24px -18px rgba(58, 45, 24, 0.24);
+  --shadow-card: 0 8px 30px -22px rgba(58, 45, 24, 0.32);
+  --shadow-float: 0 18px 50px -24px rgba(58, 45, 24, 0.36);
+}
